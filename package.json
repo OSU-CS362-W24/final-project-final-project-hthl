@@ -4,7 +4,12 @@
   "description": "CS 362 Final Project",
   "scripts": {
     "build": "webpack",
-    "start": "webpack serve --open"
+    "start": "webpack serve --open",
+    "cy:open": "cypress open",
+    "cy:run": "cypress run",
+    "test:e2e": "start-test start http://localhost:3001 cy:run",
+    "test:integration": "jest",
+    "test": "npm-run-all test:*"
   },
   "devDependencies": {
     "css-loader": "^6.7.4",
@@ -12,7 +17,9 @@
     "style-loader": "^3.3.3",
     "webpack": "^5.83.1",
     "webpack-cli": "^5.1.1",
-    "webpack-dev-server": "^4.15.0"
+    "webpack-dev-server": "^4.15.0",
+    "npm-run-all": "^4.1.5",
+    "start-server-and-test": "^2.0.0"
   },
   "jest": {
     "moduleNameMapper": {
