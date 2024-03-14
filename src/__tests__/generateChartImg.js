@@ -1,5 +1,3 @@
-describe('generateChartImg', () => {
-    it('1 == 1', () => {
-        expect(1).toBe(1)
-    })
+test("dummy test", function(){
+    expect(1).toBe(1)
 })
