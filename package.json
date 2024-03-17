@@ -31,17 +31,11 @@
   "jest": {
     "moduleNameMapper": {
       "\\.css$": "<rootDir>/src/__mocks__/styleMock.js"
-    },
-    "setupFiles": [
-      "./jest.polyfills.js"
-    ]
+    }
 
   },
   "main": "webpack.config.js",
-  "dependencies": {
-    "bcryptjs": "^2.4.3",
-    "undici": "^5.28.3"
-  },
+
   "author": "",
   "license": "ISC"
 }
