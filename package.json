@@ -9,7 +9,8 @@
     "cy:run": "cypress run",
     "test:e2e": "npm run cy:run",
     "test:integration": "jest --passWithNoTests",
-    "test": "jest"
+
+    "test": "npm-run-all test:*"
   },
   "devDependencies": {
     "@testing-library/dom": "^9.3.4",

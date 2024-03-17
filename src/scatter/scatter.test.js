@@ -22,11 +22,11 @@ chart builder behaves correctly. Each time the user clicks this button, it shoul
 add a new pair of input fields for the user to enter new X and Y values. Clicking
 the button should not impact any data the user has already entered.*/
 
-describe('Test for adding values', function () {
+describe('1 Test the + button (add value)', function () {
   beforeEach(function () {
     jest.resetModules();
   });
-  test('A new pair of input fields for the user is added everytime the user clicks + button', async function () {
+  test('A new pair of input fields is added', async function () {
     initDomFromFiles(`${__dirname}/scatter.html`, `${__dirname}/scatter.js`);
     const addButton = domTesting.getByText(document, '+');
     const user = userEvent.setup();
@@ -55,7 +55,7 @@ describe('Test for adding values', function () {
     jest.resetModules();
   });
 
-  test('clicking the + button doesn`t impact the old data', async function () {
+  test('Old data remains unchanged', async function () {
     initDomFromFiles(`${__dirname}/scatter.html`, `${__dirname}/scatter.js`);
     const user = userEvent.setup();
     const addButton = domTesting.getByText(document, '+');
@@ -85,47 +85,53 @@ describe('Test for adding values', function () {
       })[0]
     ).toHaveValue(Y);
   });
-  beforeEach(function () {
-    jest.resetModules();
-    chartStorage.updateCurrentChartData({});
+
+});
+
+
+
+beforeEach(function () {
+  jest.resetModules();
+  chartStorage.updateCurrentChartData({}); //to reset the local storage
+});
+
+
+test('4 generate chart image correctly', async function () {
+  initDomFromFiles(`${__dirname}/scatter.html`, `${__dirname}/scatter.js`);
+
+  const user = userEvent.setup();
+  jest.mock('../lib/generateChartImg.js');
+  const generateChartImgSpy = require('../lib/generateChartImg.js');
+
+  const input = {
+    title: 'Scatter',
+    data: [{ x: 0, y: 0 }],
+    xLabel: 'X',
+    type: 'scatter',
+    yLabel: 'Y',
+  };
+
+  const title = domTesting.getByLabelText(document, 'Chart title');
+  const xField = domTesting.getByLabelText(document, 'X', {
+    exact: true,
   });
-  test('generate chart image correctly', async function () {
-    initDomFromFiles(`${__dirname}/scatter.html`, `${__dirname}/scatter.js`);
-
-    const user = userEvent.setup();
-    jest.mock('../lib/generateChartImg.js');
-    const generateChartImgSpy = require('../lib/generateChartImg.js');
-
-    const input = {
-      title: 'Scatter',
-      data: [{ x: 0, y: 0 }],
-      xLabel: 'X',
-      type: 'scatter',
-      yLabel: 'Y',
-    };
-
-    const title = domTesting.getByLabelText(document, 'Chart title');
-    const xField = domTesting.getByLabelText(document, 'X', {
-      exact: true,
-    });
-    const yField = domTesting.getByLabelText(document, 'Y', {
-      exact: true,
-    });
-    const xLabel = domTesting.getByLabelText(document, 'X label', {
-      exact: true,
-    });
-    const yLabel = domTesting.getByLabelText(document, 'Y label', {
-      exact: true,
-    });
-    const genBtn = domTesting.getByText(document, 'Generate chart');
-
-    await user.type(title, input.title);
-    await user.type(xLabel, input.xLabel);
-    await user.type(yLabel, input.yLabel);
-    await user.type(xField, JSON.stringify(input.data[0].x));
-    await user.type(yField, JSON.stringify(input.data[0].y));
-    await user.click(genBtn);
-    expect(generateChartImgSpy).toHaveBeenCalled();
-    generateChartImgSpy.mockRestore();
+  const yField = domTesting.getByLabelText(document, 'Y', {
+    exact: true,
   });
+  const xLabel = domTesting.getByLabelText(document, 'X label', {
+    exact: true
+  });
+  const yLabel = domTesting.getByLabelText(document, 'Y label', {
+    exact: true,
+  });
+  const genBtn = domTesting.getByText(document, 'Generate chart');
+
+  await user.type(title, input.title);
+  await user.type(xLabel, input.xLabel);
+  await user.type(yLabel, input.yLabel);
+  await user.type(xField, JSON.stringify(input.data[0].x));
+  await user.type(yField, JSON.stringify(input.data[0].y));
+  await user.click(genBtn);
+  expect(generateChartImgSpy).toHaveBeenCalled();
+  generateChartImgSpy.mockRestore();
 });
