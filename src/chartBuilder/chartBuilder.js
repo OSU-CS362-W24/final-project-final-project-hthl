@@ -246,6 +246,7 @@ module.exports = function runChartBuilder(type) {
             displayChartImg(imgUrl)
             updateSaveChartBtn("Save chart", false)
         } catch (e) {
+            console.log(e)
             alert(`Error generating chart:\n\n${e}`)
         }
     }
