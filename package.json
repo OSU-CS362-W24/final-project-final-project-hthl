@@ -9,7 +9,7 @@
     "cy:run": "cypress run",
     "test:e2e": "npm run cy:run",
     "test:integration": "jest --passWithNoTests",
-    "test": "npm-run-all test:*"
+    "test": "jest"
   },
   "devDependencies": {
     "css-loader": "^6.7.4",
