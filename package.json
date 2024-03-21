@@ -29,13 +29,15 @@
     "webpack-dev-server": "^4.15.0"
   },
   "jest": {
+    "clearMocks": true,
     "moduleNameMapper": {
       "\\.css$": "<rootDir>/src/__mocks__/styleMock.js"
     }
-
   },
   "main": "webpack.config.js",
-
   "author": "",
-  "license": "ISC"
+  "license": "ISC",
+  "dependencies": {
+    "whatwg-fetch": "^3.6.20"
+  }
 }

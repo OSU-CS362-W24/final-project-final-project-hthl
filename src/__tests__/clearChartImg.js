@@ -9,6 +9,7 @@ const fs = require("fs")
 const domTesting = require('@testing-library/dom')
 require('@testing-library/jest-dom')
 const userEvent = require("@testing-library/user-event").default
+require("whatwg-fetch")
 
 
 function initDomFromFiles(htmlPath, jsPath) {
@@ -145,8 +146,8 @@ function initDomFromFiles(htmlPath, jsPath) {
         await userEvent.type(xVals[5], "0")
         await userEvent.type(yVals[5], "0")
         
-        expect(xVals.length).toBe(6) //checking that there are 2 x values
-        expect(yVals.length).toBe(6) //checking that there are 2 y values
+        expect(xVals.length).toBe(6) //checking that there are 6 x values
+        expect(yVals.length).toBe(6) //checking that there are 6 y values
 
         expect(chartImg).toBeDefined() //checking that the chart exists
 
