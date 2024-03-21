@@ -57,4 +57,11 @@ describe('chartStorage', () => {
 
     expect(JSON.parse(window.localStorage.getItem('currentChartData'))).toEqual(chart);
   });
+  
+  it('should retrieve the current chart data', () => {
+    const chart = { id: 'chart-1', data: [1, 2, 3] };
+    chartStorage.updateCurrentChartData(chart);
+
+    expect(chartStorage.loadCurrentChartData()).toEqual(chart);
+  });
 });
