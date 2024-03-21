@@ -41,4 +41,13 @@ describe('chartStorage', () => {
 
     expect(chartStorage.loadSavedChart(1)).toEqual(chart2);
   });
+
+  it('should retrieve all charts', () => {
+    const chart1 = { id: 'chart-1', data: [1, 2, 3] };
+    const chart2 = { id: 'chart-2', data: [4, 5, 6] };
+    chartStorage.saveChart(chart1);
+    chartStorage.saveChart(chart2);
+
+    expect(chartStorage.loadAllSavedCharts()).toEqual([chart1, chart2]);
+  });
 });
