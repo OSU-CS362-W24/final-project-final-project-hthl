@@ -7,7 +7,6 @@ const generate = require('../lib/generateChartImg');
     const title = 'Line chart';
     const color = '#fef65b'
     const blob = await generate(type, data, xLabel, yLabel, title, color);
-    console.log(blob);
     expect(blob).not.toHaveLength(0);
   });
   test('line chart generated without title', async function () {
@@ -17,7 +16,6 @@ const generate = require('../lib/generateChartImg');
     const title = null;
     const color = '#fef65b'
     const blob = await generate(type, data, xLabel, yLabel, title, color);
-    console.log(blob);
     expect(blob).not.toHaveLength(0);
   });
   test('scatter chart generated without color input', async function () {
@@ -27,7 +25,6 @@ const generate = require('../lib/generateChartImg');
     const title = 'scatter chart';
     const color = null;
     const blob = await generate(type, data, xLabel, yLabel, title, color);
-    console.log(blob);
     expect(blob).not.toHaveLength(0);
   });
   test('scatter chart generated with positive and negative inputs',async function(){
@@ -37,7 +34,6 @@ const generate = require('../lib/generateChartImg');
     const title = 'Scatter'
     const color = '#fef65b'
     const blob = await generate(type, data, xLabel, yLabel, title, color);
-    console.log(blob);
     expect(blob).not.toHaveLength(0);
   })
   test('scatter chart generated with positive and negative inputs',async function(){
@@ -47,7 +43,6 @@ const generate = require('../lib/generateChartImg');
     const title = 'Scatter'
     const color = '#fef65b'
     const blob = await generate(type, data, xLabel, yLabel, title, color);
-    console.log(blob);
     expect(blob).not.toHaveLength(0);
   });
   test('scatter chart generated with decimal input',async function(){
@@ -57,7 +52,6 @@ const generate = require('../lib/generateChartImg');
     const title = 'Scatter'
     const color = '#fef65b'
     const blob = await generate(type, data, xLabel, yLabel, title, color);
-    console.log(blob);
     expect(blob).not.toHaveLength(0);
   });
   test('bar chart generated with decimal input',async function(){
@@ -67,8 +61,10 @@ const generate = require('../lib/generateChartImg');
     const title = 'bar'
     const color = '#fef65b'
     const blob = await generate(type, data, xLabel, yLabel, title, color);
-    console.log(blob);
     expect(blob).not.toHaveLength(0);
   });
+
+
+  
 
 

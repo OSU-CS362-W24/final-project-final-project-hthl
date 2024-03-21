@@ -8,7 +8,7 @@
     "cy:open": "cypress open",
     "cy:run": "cypress run",
     "test:e2e": "npm run cy:run",
-    "test:integration": "jest --passWithNoTests",
+    "test:integration": "jest",
     "test": "npm-run-all test:*"
   },
   "devDependencies": {
