@@ -50,4 +50,11 @@ describe('chartStorage', () => {
 
     expect(chartStorage.loadAllSavedCharts()).toEqual([chart1, chart2]);
   });
+  
+  it('should update the current chart data', () => {
+    const chart = { id: 'chart-1', data: [1, 2, 3] };
+    chartStorage.updateCurrentChartData(chart);
+
+    expect(JSON.parse(window.localStorage.getItem('currentChartData'))).toEqual(chart);
+  });
 });
