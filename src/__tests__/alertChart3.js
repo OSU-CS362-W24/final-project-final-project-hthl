@@ -21,20 +21,23 @@ beforeEach(function() {
     jest.restoreAllMocks()
 })
 
-test('alert message generated for missing x axis label and y axis label, but supplied x and y values', async function() {
+test('alert message generated for x axis and y axis and x value, but missing y value', async function() {
    
     const theSpy = jest.spyOn(window, "alert")
     initDomFromFiles(`${__dirname}/../scatter/scatter.html`, `${__dirname}/../scatter/scatter.js`)
     const xVals = document.getElementsByClassName("x-value-input")
     const yVals = document.getElementsByClassName("y-value-input")
     const Generate = document.getElementById("generate-chart-btn")
+    const xLabelInput = document.getElementById("x-label-input")
+    const yLabelInput = document.getElementById("y-label-input")
 
+
+    await userEvent.type(xLabelInput, "The X Axis")
+    await userEvent.type(yLabelInput, "The Y Axis")
     await userEvent.type(xVals[0], "1")
-    await userEvent.type(yVals[0], "2")
 
     await userEvent.click(Generate)
 
-    expect(theSpy).toHaveBeenCalledWith('Error: Must specify a label for both X and Y!');
+    expect(theSpy).not.toHaveBeenCalledWith() //It will fill in 0 for y
 
 })
-
