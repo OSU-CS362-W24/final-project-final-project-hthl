@@ -25,26 +25,30 @@ function initDomFromFiles(htmlPath, jsPath) {
     test('scatter chart generated and cleared for one x value and one y value',async function(){
         initDomFromFiles(`${__dirname}/../scatter/scatter.html`, `${__dirname}/../scatter/scatter.js`)
         
-        const titleInput = document.getElementById("chart-title-input")
-        const xLabelInput = document.getElementById("x-label-input")
-        const yLabelInput = document.getElementById("y-label-input")
+        const titleInput = domTesting.getByTestId(document, "chart-title-input")
+        const xLabelInput = domTesting.getByTestId(document,"x-label-input")
+        const yLabelInput = domTesting.getByTestId(document,"y-label-input")
         const xVals = document.getElementsByClassName("x-value-input")
         const yVals = document.getElementsByClassName("y-value-input")
         const addButton = document.getElementById("add-values-btn")
         const chartImg = document.getElementById("chart-img")
         const clearButton = document.getElementById("clear-chart-btn")
+        const color = domTesting.getByTestId(document, "color")
 
-        await userEvent.type(titleInput, "A Good Chart Title")
-        await userEvent.type(xLabelInput, "The X Axis")
-        await userEvent.type(yLabelInput, "The Y Axis")
-        await userEvent.type(xVals[0], "5")
-        await userEvent.type(yVals[0], "5")
+        await userEvent.type(titleInput, "A Good Chart Title") //Setting Title
+        await userEvent.type(xLabelInput, "The X Axis") //Setting X axis
+        await userEvent.type(yLabelInput, "The Y Axis") //Setting Y axis
+        await userEvent.type(xVals[0], "5") //Entering value for X
+        await userEvent.type(yVals[0], "5") //Entering value for Y
+        await userEvent.type(color,"#ff2211") //Changing color
 
         expect(chartImg).toBeDefined() //checking that the chart exists
 
         await userEvent.click(clearButton)
 
         expect(chartImg).toBe(null)  //checking that the chart clears
+
+        expect(color.value).toBe("#ff4500")  //checking that the color resets
 
         //checking that all input fields are empty
         expect(xVals[0].textContent).toBe("")
@@ -59,20 +63,22 @@ function initDomFromFiles(htmlPath, jsPath) {
     test('scatter chart generated and cleared for two x values and y values',async function(){
         initDomFromFiles(`${__dirname}/../scatter/scatter.html`, `${__dirname}/../scatter/scatter.js`)
         
-        const titleInput = document.getElementById("chart-title-input")
-        const xLabelInput = document.getElementById("x-label-input")
-        const yLabelInput = document.getElementById("y-label-input")
+        const titleInput = domTesting.getByTestId(document, "chart-title-input")
+        const xLabelInput = domTesting.getByTestId(document,"x-label-input")
+        const yLabelInput = domTesting.getByTestId(document,"y-label-input")
         const xVals = document.getElementsByClassName("x-value-input")
         const yVals = document.getElementsByClassName("y-value-input")
         const addButton = document.getElementById("add-values-btn")
         const chartImg = document.getElementById("chart-img")
         const clearButton = document.getElementById("clear-chart-btn")
+        const color = domTesting.getByTestId(document, "color")
 
         await userEvent.type(titleInput, "A Good Chart Title")
         await userEvent.type(xLabelInput, "The X Axis")
         await userEvent.type(yLabelInput, "The Y Axis")
         await userEvent.type(xVals[0], "5")
         await userEvent.type(yVals[0], "5")
+        await userEvent.type(color,"#ff1231")
         
         await userEvent.click(addButton)
 
@@ -87,6 +93,8 @@ function initDomFromFiles(htmlPath, jsPath) {
         await userEvent.click(clearButton)
 
         expect(chartImg).toBe(null)  //checking that the chart clears
+
+        expect(color.value).toBe("#ff4500")  //checking that the color resets
 
         //Reset the page to display just one pair of input fields for entering X and Y values (their lengths are each 1).
         expect(xVals.length).toBe(1)
@@ -106,20 +114,22 @@ function initDomFromFiles(htmlPath, jsPath) {
       test('scatter chart generated and cleared for severl x values and y values',async function(){
         initDomFromFiles(`${__dirname}/../scatter/scatter.html`, `${__dirname}/../scatter/scatter.js`)
         
-        const titleInput = document.getElementById("chart-title-input")
-        const xLabelInput = document.getElementById("x-label-input")
-        const yLabelInput = document.getElementById("y-label-input")
+        const titleInput = domTesting.getByTestId(document, "chart-title-input")
+        const xLabelInput = domTesting.getByTestId(document,"x-label-input")
+        const yLabelInput = domTesting.getByTestId(document,"y-label-input")
         const xVals = document.getElementsByClassName("x-value-input")
         const yVals = document.getElementsByClassName("y-value-input")
-        const addButton = document.getElementById("add-values-btn")
-        const chartImg = document.getElementById("chart-img")
-        const clearButton = document.getElementById("clear-chart-btn")
+        const addButton = domTesting.getByTestId(document, "add-values-btn")
+        const chartImg = document.getElementById(document,"chart-img")
+        const clearButton = domTesting.getByTestId(document,"clear-chart-btn")
+        const color = domTesting.getByTestId(document, "color")
 
         await userEvent.type(titleInput, "A Good Chart Title")
         await userEvent.type(xLabelInput, "The X Axis")
         await userEvent.type(yLabelInput, "The Y Axis")
         await userEvent.type(xVals[0], "5")
         await userEvent.type(yVals[0], "5")
+        await userEvent.type(color,"#ff1111")
         
         await userEvent.click(addButton)
 
@@ -154,6 +164,7 @@ function initDomFromFiles(htmlPath, jsPath) {
         await userEvent.click(clearButton)
 
         expect(chartImg).toBe(null)  //checking that the chart clears
+        expect(color.value).toBe("#ff4500")  //checking that the color resets
 
         //Reset the page to display just one pair of input fields for entering X and Y values (their lengths are each 1).
         expect(xVals.length).toBe(1)
