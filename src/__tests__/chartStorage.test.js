@@ -1,24 +1,8 @@
+/**
+ * @jest-environment jsdom
+ */
+
 const chartStorage = require('../lib/chartStorage');
-
-// mock localStorage
-const localStorageMock = (() => {
-  let storage = {};
-
-  return {
-    getItem: (key) => {
-      return storage[key];
-    },
-    setItem: (key, value) => {
-      storage[key] = value.toString();
-    },
-    clear: () => {
-      storage = {};
-    }
-  };
-})();
-
-// setting the window global object so it also effects chartStorage.js
-global.window = { localStorage: localStorageMock };
 
 describe('chartStorage', () => {
   beforeEach(() => {
