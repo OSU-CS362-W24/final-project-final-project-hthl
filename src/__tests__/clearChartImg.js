@@ -3,7 +3,6 @@
 /**
  * @jest-environment jsdom
  */
-
 const generate = require('../lib/generateChartImg')
 const fs = require("fs")
 const domTesting = require('@testing-library/dom')
@@ -34,6 +33,7 @@ function initDomFromFiles(htmlPath, jsPath) {
         const chartImg = document.getElementById("chart-img")
         const clearButton = document.getElementById("clear-chart-btn")
         const color = domTesting.getByTestId(document, "color")
+        const generate = domTesting.getByTestId(document, "generate-chart-btn")
 
         await userEvent.type(titleInput, "A Good Chart Title") //Setting Title
         await userEvent.type(xLabelInput, "The X Axis") //Setting X axis
@@ -41,6 +41,8 @@ function initDomFromFiles(htmlPath, jsPath) {
         await userEvent.type(xVals[0], "5") //Entering value for X
         await userEvent.type(yVals[0], "5") //Entering value for Y
         await userEvent.type(color,"#ff2211") //Changing color
+        
+        await userEvent.click(generate)
 
         expect(chartImg).toBeDefined() //checking that the chart exists
 
@@ -72,6 +74,7 @@ function initDomFromFiles(htmlPath, jsPath) {
         const chartImg = document.getElementById("chart-img")
         const clearButton = document.getElementById("clear-chart-btn")
         const color = domTesting.getByTestId(document, "color")
+        const generate = domTesting.getByTestId(document, "generate-chart-btn")
 
         await userEvent.type(titleInput, "A Good Chart Title")
         await userEvent.type(xLabelInput, "The X Axis")
@@ -87,6 +90,7 @@ function initDomFromFiles(htmlPath, jsPath) {
         
         expect(xVals.length).toBe(2) //checking that there are 2 x values
         expect(yVals.length).toBe(2) //checking that there are 2 y values
+        await userEvent.click(generate)
 
         expect(chartImg).toBeDefined() //checking that the chart exists
 
@@ -111,7 +115,7 @@ function initDomFromFiles(htmlPath, jsPath) {
       })
 
 
-      test('scatter chart generated and cleared for severl x values and y values',async function(){
+      test('scatter chart generated and cleared for several x values and y values',async function(){
         initDomFromFiles(`${__dirname}/../scatter/scatter.html`, `${__dirname}/../scatter/scatter.js`)
         
         const titleInput = domTesting.getByTestId(document, "chart-title-input")
@@ -123,6 +127,7 @@ function initDomFromFiles(htmlPath, jsPath) {
         const chartImg = document.getElementById(document,"chart-img")
         const clearButton = domTesting.getByTestId(document,"clear-chart-btn")
         const color = domTesting.getByTestId(document, "color")
+        const generate = domTesting.getByTestId(document, "generate-chart-btn")
 
         await userEvent.type(titleInput, "A Good Chart Title")
         await userEvent.type(xLabelInput, "The X Axis")
@@ -158,7 +163,7 @@ function initDomFromFiles(htmlPath, jsPath) {
         
         expect(xVals.length).toBe(6) //checking that there are 6 x values
         expect(yVals.length).toBe(6) //checking that there are 6 y values
-
+        await userEvent.click(generate)
         expect(chartImg).toBeDefined() //checking that the chart exists
 
         await userEvent.click(clearButton)

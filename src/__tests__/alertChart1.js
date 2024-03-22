@@ -23,7 +23,7 @@ beforeEach(function() {
 
 test('alert message generated for missing x and y values, but supplied x axis label and y axis label', async function() {
 
-    global.alert = jest.fn();
+    const theSpy = jest.spyOn(window, "alert")
     initDomFromFiles(`${__dirname}/../scatter/scatter.html`, `${__dirname}/../scatter/scatter.js`);
     const xLabelInput = document.getElementById("x-label-input")
     const yLabelInput = document.getElementById("y-label-input")
@@ -33,6 +33,7 @@ test('alert message generated for missing x and y values, but supplied x axis la
     await userEvent.type(yLabelInput, "The Y Axis")
     await userEvent.click(Generate)
 
-    expect(global.alert).toHaveBeenCalledWith('Error: No data specified!')
+    expect(theSpy).toHaveBeenCalledWith('Error: No data specified!')
 
 });
+
